@@ -25,7 +25,7 @@ set ( _source_files fftx_1d_gpu.cpp
 foreach ( _src ${_source_files} )
     ##  set the desired language property
     if ( ${_codegen} STREQUAL "HIP" )
-	set_source_files_properties ( ${_src} PROPERTIES LANGUAGE CXX )
+	set_source_files_properties ( ${_src} PROPERTIES LANGUAGE ${FFTX_HIP_LANGUAGE} )
     elseif ( ${_codegen} STREQUAL "CUDA" )
 	set_source_files_properties ( ${_src} PROPERTIES LANGUAGE CUDA )
     endif ()

@@ -460,6 +460,7 @@ def cmake_library ( script ):
         str.append ( 'target_compile_options     ( ${_lib_name} PRIVATE ${ADDL_COMPILE_FLAGS} )\n' )
         str.append ( 'set_property        ( TARGET ${_lib_name} PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS ON )\n\n' )
     elif script.args.platform == 'HIP':
+        str.append ( 'set_source_files_properties ( ${_source_files} PROPERTIES LANGUAGE ${FFTX_HIP_LANGUAGE} )\n' )
         str.append ( 'target_compile_options     ( ${_lib_name} PRIVATE ${HIP_COMPILE_FLAGS} ${ADDL_COMPILE_FLAGS} )\n\n' )
     elif script.args.platform == 'SYCL':
         str.append ( 'target_compile_options     ( ${_lib_name} PRIVATE ${SYCL_COMPILE_FLAGS} ${ADDL_COMPILE_FLAGS} )\n\n' )

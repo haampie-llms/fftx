@@ -54,6 +54,23 @@ include ( "${FFTX_CMAKE_INCLUDE_DIR}/FFTXCmakeFunctions.cmake" )
 if ( ${_codegen} STREQUAL "HIP" )
     ##  Setup what we need to build for HIP/ROCm
     list ( APPEND CMAKE_PREFIX_PATH /opt/rocm/hip /opt/rocm )
+
+    ##  HIP sources are compiled as C++ when the C++ compiler is hipcc (or another
+    ##  Clang based HIP compiler), and with CMake's HIP language otherwise.
+    ##  FFTX_HIP_LANGUAGE is the language to use for HIP sources.
+    if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
+	set ( FFTX_HIP_LANGUAGE CXX )
+    else ()
+	if ( CMAKE_VERSION VERSION_LESS 3.21 )
+	    message ( FATAL_ERROR "The HIP language requires CMake 3.21 or later" )
+	endif ()
+	if ( NOT DEFINED CMAKE_HIP_ARCHITECTURES AND DEFINED GPU_TARGETS )
+	    set ( CMAKE_HIP_ARCHITECTURES ${GPU_TARGETS} )
+	endif ()
+	enable_language ( HIP )
+	set ( FFTX_HIP_LANGUAGE HIP )
+    endif ()
+
     find_package ( hip REQUIRED )
     if ( ${hip_FOUND} )
 	##  HIP/ROCm support found

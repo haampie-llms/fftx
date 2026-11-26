@@ -31,7 +31,7 @@ endif ()
 foreach ( _prog ${BUILD_PROGS} )
     ##  Build the dependencies and get the include directories / libraries for each program
     if ( ${_codegen} STREQUAL "HIP" )
-        set_source_files_properties ( ${_prog}.${_desired_suffix} PROPERTIES LANGUAGE CXX )
+        set_source_files_properties ( ${_prog}.${_desired_suffix} PROPERTIES LANGUAGE ${FFTX_HIP_LANGUAGE} )
     elseif ( ${_codegen} STREQUAL "CUDA" )
         set_source_files_properties ( ${_prog}.${_desired_suffix} PROPERTIES LANGUAGE CUDA )
     endif ()

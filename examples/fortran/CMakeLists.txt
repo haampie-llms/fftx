@@ -63,7 +63,7 @@ foreach ( _prog ${BUILD_PROGS} )
     set_source_files_properties ( ${FORTRAN_SOURCES} PROPERTIES LANGUAGE Fortran )
 
     if ( ${_codegen} STREQUAL "HIP" )
-        set_source_files_properties ( ${CPP_SOURCES} PROPERTIES LANGUAGE CXX )
+        set_source_files_properties ( ${CPP_SOURCES} PROPERTIES LANGUAGE ${FFTX_HIP_LANGUAGE} )
     elseif ( ${_codegen} STREQUAL "CUDA" )
         set_source_files_properties ( ${CPP_SOURCES} PROPERTIES LANGUAGE CUDA )
     endif ()

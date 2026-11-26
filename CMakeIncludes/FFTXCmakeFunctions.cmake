@@ -166,7 +166,11 @@ endfunction ()
 function ( add_includes_libs_to_target _target _stem _prefixes )
     list ( APPEND _all_build_srcs ${_target}.${_suffix} )
     add_executable   ( ${_target} ${_all_build_srcs} )
-    set_target_properties ( ${_target} PROPERTIES LINKER_LANGUAGE CXX)  # force explicit linking step
+    if ( ${_codegen} STREQUAL "HIP" )
+	set_target_properties ( ${_target} PROPERTIES LINKER_LANGUAGE ${FFTX_HIP_LANGUAGE} )  # force explicit linking step
+    else ()
+	set_target_properties ( ${_target} PROPERTIES LINKER_LANGUAGE CXX)  # force explicit linking step
+    endif ()
 
     ##  message ( STATUS "executable added: target = ${_target}, depends: = ${_all_build_srcs}" )
     ##  message ( STATUS "dependencies for ${_target} = ${_all_build_deps}" )
