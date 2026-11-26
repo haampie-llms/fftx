@@ -195,7 +195,8 @@ mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=$FFTX_HOME -D_codegen=CPU ..      # build for CPU, *or*
 cmake -DCMAKE_INSTALL_PREFIX=$FFTX_HOME -D_codegen=CUDA ..     # build for CUDA, *or*
-cmake -DCMAKE_INSTALL_PREFIX=$FFTX_HOME -DCMAKE_CXX_COMPILER=hipcc -D_codegen=HIP ..      # build for HIP
+cmake -DCMAKE_INSTALL_PREFIX=$FFTX_HOME -DCMAKE_CXX_COMPILER=hipcc -D_codegen=HIP ..      # build for HIP, *or*
+cmake -DCMAKE_INSTALL_PREFIX=$FFTX_HOME -DCMAKE_CXX_COMPILER=g++ -DCMAKE_HIP_COMPILER=amdclang++ -DCMAKE_HIP_ARCHITECTURES=gfx90a -D_codegen=HIP ..      # build for HIP with GCC as C++ compiler
 cmake -DCMAKE_INSTALL_PREFIX=$FFTX_HOME -DCMAKE_CXX_COMPILER=icpx -D_codegen=SYCL ..      # build for SYCL
 
 make install
